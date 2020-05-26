@@ -93,10 +93,10 @@ public class MyProfileSubmit extends HttpServlet {
 			user.setEmail(resultSet.getString(11));
 			session.setAttribute("customer", user);
 			}
-			out.println("Updated Successfully!");
+			out.println("<h3>Updated Successfully!</h3>");
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			out.println("Sorry, an error occured.<br>"+e);
+			out.println("<h3>Sorry, an error occured.</h3><br>"+e);
 		}
 		finally
 		{

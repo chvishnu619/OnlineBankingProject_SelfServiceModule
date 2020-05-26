@@ -50,23 +50,38 @@ public class PasswordSubmit extends HttpServlet {
 		response.setContentType("text/html");
 		HttpSession session=request.getSession();
 		Connection conn = null;
+
 		try {
 			conn = DBConnection.getConnection();
 			User u=(User)session.getAttribute("customer");
 			Statement stmt=conn.createStatement();
 			String dbo = null;
-			ResultSet rs=stmt.executeQuery("select password from customer where username='"+u.getPassword()+"'");
+			ResultSet rs=stmt.executeQuery("select password from customer where username='"+u.getUsername()+"'");
 			while(rs.next())
 			{
 				dbo=rs.getString(1);
 			}
+			int flag=0;
+			//System.out.println("o="+o+"\ndbo="+dbo+"\n n="+n+"\nr="+r);
 			if(o.equals(dbo))
 			{
 				if(n.equals(r))
 				{
 					stmt.executeUpdate("update customer set password='"+n+"' where username='"+u.getUsername()+"'");
 				}
+				else
+				{
+					out.println("<h3>Passwords do not match!</h3>");
+					flag=1;
+				}
 			}
+			else
+			{
+				out.println("<h3>Old password does not match!</h3>");
+				flag=1;
+			}
+			if(flag==0)
+			{
 			ResultSet resultSet=stmt.executeQuery("select * from customer where username='"+u.getUsername()+"'");
 			
 			while(resultSet.next())
@@ -87,6 +102,7 @@ public class PasswordSubmit extends HttpServlet {
 			}
 			
 			out.println("<h3>Password changed!<h3>");
+			}
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
 			out.println("<h3>Sorry, an error occured.<br>"+e+"</h3>");

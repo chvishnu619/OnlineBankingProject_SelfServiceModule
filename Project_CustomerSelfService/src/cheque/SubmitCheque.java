@@ -47,6 +47,7 @@ public class SubmitCheque extends HttpServlet {
 		String detail="Cheque book request for account "+acc+" of "+leaves.toString()+" leaves";
 		//System.out.println("detail is "+detail);
 		PrintWriter out=response.getWriter();
+		response.setContentType("text/html");
 		Connection conn=null;
 		Calendar c=Calendar.getInstance();
 		Integer td=c.get(Calendar.DAY_OF_MONTH);
@@ -67,11 +68,11 @@ public class SubmitCheque extends HttpServlet {
 			stmt.executeUpdate("insert into customer_service_request(request_date,csr_type,detail,username,request_id) values"
 					+ "('"+date+"' , 1 , '"+detail+"' , '"+username+"' ,"+r+" )");
 			stmt.executeUpdate("insert into cheque_requests values('"+acc+"' ,"+r+","+leaves+")");
-			out.println("Request placed!");
+			out.println("<h3>Request placed!</h3>");
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			out.println("Error occurred "+e);
+			out.println("<h3>Error occurred </h3>"+e);
 		}
 		finally
 		{

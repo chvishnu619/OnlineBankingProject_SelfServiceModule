@@ -50,6 +50,7 @@ public class SubmitQuery extends HttpServlet {
 		String username=request.getParameter("username");
 		String detail="Query request made by "+username;
 		PrintWriter out=response.getWriter();
+		response.setContentType("text/html");
 		Connection conn=null;
 		Calendar c=Calendar.getInstance();
 		Integer td=c.get(Calendar.DAY_OF_MONTH);
@@ -73,11 +74,11 @@ public class SubmitQuery extends HttpServlet {
 					+ "('"+date+"' , 7 , '"+detail+"' , '"+username+"' ,"+r+" )");
 			//System.out.println("insert into stolen_card_requests values('"+acc+"' ,"+r+", '"+date+"')");
 			stmt.executeUpdate("insert into query_requests values("+r+", '"+content+"')");
-			out.println("Request placed!");
+			out.println("<h3>Request placed!</h3>");
 			
 		} catch (Exception e) {
 			// TODO Auto-generated catch block
-			out.println("Error occurred "+e);
+			out.println("<h3>Error occurred</h3> "+e);
 		}
 		finally
 		{

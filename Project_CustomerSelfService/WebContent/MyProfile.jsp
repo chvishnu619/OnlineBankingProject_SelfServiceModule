@@ -17,6 +17,7 @@ User u=(User)session.getAttribute("customer");
 </div>
 <div align='right'>
 <h3 style='color: red'>Welcome <% out.println(u.getName()); %> !</h3>
+<h3 style='color: red'><a href='LoginPage.jsp'>Signout</a></h3>
 </div>
 <div align='center'>
 <form action='MyProfileSubmit' method='post'>

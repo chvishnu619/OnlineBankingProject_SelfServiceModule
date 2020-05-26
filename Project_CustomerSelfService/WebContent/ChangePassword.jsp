@@ -15,6 +15,10 @@ User u=(User)session.getAttribute("customer");
 
 <body>
 
+<div align='center'>
+<h1><b>Change Password</b></h1>
+</div>
+
 <div align='right'>
 <h3 style='color: red'>Welcome <% out.println(u.getName()); %> !</h3>
 <h3 style='color: red'><a href='LoginPage.jsp'>Signout</a></h3>
